@@ -1,1 +1,423 @@
+/* ============================================
+   IFA 2026 — Glossário de Física e Robótica
+   Tema: Óptica
+   Prof. Marcio Antonio Lopes
+   ============================================ */
 
+/* ── Variáveis ── */
+:root {
+  --bg-deep:       #0A1628;
+  --bg-mid:        #0F1F3D;
+  --bg-card:       #122245;
+  --bg-card-hover: #162B54;
+  --blue-electric: #1E6FD9;
+  --cyan:          #00C2FF;
+  --cyan-dim:      rgba(0, 194, 255, 0.15);
+  --text-white:    #F0F8FF;
+  --text-muted:    #8BA3C7;
+  --text-faint:    #4A6490;
+  --accent-line:   rgba(0, 194, 255, 0.25);
+
+  --font-display: 'Orbitron', monospace;
+  --font-body:    'Inter', sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --transition: 0.25s ease;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-deep);
+  color: var(--text-white);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ── Container ── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ════════════════════════════════════════════
+   CABEÇALHO
+════════════════════════════════════════════ */
+.site-header {
+  position: relative;
+  background: linear-gradient(160deg, #0D1E3C 0%, #0A1628 60%, #061020 100%);
+  padding: 56px 24px 72px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--accent-line);
+}
+
+/* Grade estilo blueprint ao fundo */
+.header-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,194,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,194,255,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* Badge IFA 2026 */
+.header-top {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto 32px;
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--cyan);
+  border: 1px solid var(--cyan);
+  border-radius: var(--radius-sm);
+  padding: 5px 14px;
+  text-transform: uppercase;
+}
+
+/* Conteúdo principal do header */
+.header-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text-white);
+  margin-bottom: 12px;
+}
+
+.site-title .accent {
+  color: var(--cyan);
+}
+
+.site-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: var(--blue-electric);
+  letter-spacing: 0.08em;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.professor {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  padding-left: 14px;
+  border-left: 2px solid var(--blue-electric);
+}
+
+/* Decoração SVG circulada no canto */
+.header-decoration {
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 340px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.deco-svg {
+  width: 100%;
+  height: auto;
+  animation: rotateSlow 60s linear infinite;
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ════════════════════════════════════════════
+   SEÇÃO DE IMAGENS
+════════════════════════════════════════════ */
+.images-section {
+  padding: 64px 0 48px;
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.image-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Área reservada para a imagem */
+.image-placeholder {
+  background: var(--bg-card);
+  border: 1px dashed rgba(0, 194, 255, 0.35);
+  border-radius: var(--radius-lg);
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--transition), background var(--transition);
+  overflow: hidden;
+}
+
+.image-placeholder:hover {
+  border-color: var(--cyan);
+  background: var(--bg-card-hover);
+}
+
+.placeholder-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  padding: 24px;
+}
+
+.placeholder-icon {
+  width: 56px;
+  height: 56px;
+  opacity: 0.7;
+}
+
+.placeholder-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--cyan);
+  text-transform: uppercase;
+}
+
+.placeholder-desc {
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+/* Legenda */
+.image-caption {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+  padding: 6px 0;
+  border-top: 1px solid var(--accent-line);
+}
+
+/* ════════════════════════════════════════════
+   SEÇÃO DE GLOSSÁRIO
+════════════════════════════════════════════ */
+.glossary-section {
+  padding: 16px 0 80px;
+}
+
+.section-header {
+  margin-bottom: 40px;
+}
+
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 600;
+  color: var(--text-white);
+  margin-bottom: 10px;
+}
+
+.section-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  max-width: 560px;
+}
+
+/* Grid de cards */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.glossary-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--bg-card);
+  border: 1px solid rgba(30, 111, 217, 0.25);
+  border-radius: var(--radius-md);
+  padding: 22px 20px;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+}
+
+.glossary-card:hover {
+  border-color: var(--blue-electric);
+  background: var(--bg-card-hover);
+  transform: translateY(-3px);
+}
+
+/* Letra inicial grande */
+.term-letter {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--cyan-dim);
+  border: 1px solid rgba(0, 194, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--cyan);
+  line-height: 1;
+}
+
+.term-content {
+  flex: 1;
+}
+
+.term-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-white);
+  margin-bottom: 6px;
+}
+
+.term-def {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ════════════════════════════════════════════
+   RODAPÉ
+════════════════════════════════════════════ */
+.site-footer {
+  background: var(--bg-mid);
+  border-top: 1px solid var(--accent-line);
+  padding: 28px 24px;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-school {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-white);
+}
+
+.footer-city,
+.footer-subject {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.footer-right { text-align: right; }
+
+.footer-prof {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-white);
+}
+
+.footer-badge {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--cyan);
+  letter-spacing: 0.12em;
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVIDADE
+════════════════════════════════════════════ */
+@media (max-width: 700px) {
+  .images-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header-decoration {
+    display: none;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer-right {
+    text-align: center;
+  }
+
+  .glossary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Acessibilidade: sem movimento ── */
+@media (prefers-reduced-motion: reduce) {
+  .deco-svg { animation: none; }
+  .glossary-card { transition: none; }
+}
